@@ -55,8 +55,11 @@
       minimum width=\paperwidth-2*\border,
     ] at ([xshift=\border,yshift=-15mm-24mm-\border] current page.north west) {
       \begin{minipage}{85mm}
-        \raggedright
-        #2
+        \raggedright\huge
+        \begin{bfseries}
+          \sffamily
+          #2
+        \end{bfseries}
       \end{minipage}
     };
   \end{tikzpicture}
