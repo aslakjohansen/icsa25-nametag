@@ -46,10 +46,14 @@ defmodule Generator do
   end
   
   def generate(data) do
-    IO.puts(inspect data)
+#    IO.puts(inspect data)
     data
     |> Enum.map(fn datum ->
       name  = Map.get(datum, "First name")<>" "<>Map.get(datum, "Last name")
+      affil =
+        Map.get(datum, "Company/Institution")
+        |> String.replace("&", "\\&", global: true)
+        |> String.replace("¨a", "ä", global: true)
       _ident = Map.get(datum, "Participant ID")
       cat = Map.get(datum, "Participant category")
       ccat = cleancat(cat)
@@ -58,6 +62,11 @@ defmodule Generator do
       """
       \\StaticMaterial
       \\TopBanner{#{color}}{#{name}}
+      \\CenterText{#{color}}{
+        #{name}
+        \\\\
+        #{affil}
+      }
       \\BottomBanner{#{color}}{#{ccat}}
       \\OptionBanner{#{color}}
       \\newpage

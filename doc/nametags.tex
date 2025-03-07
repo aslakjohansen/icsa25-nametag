@@ -27,6 +27,11 @@
 \definecolor{bluetext}{HTML}{2E73A3}
 \definecolor{grey}{HTML}{AFAFAF}
 
+% styling
+\setlength{\parindent}{0mm} % horizontal indent for first line of paragraph
+
+\newcommand{\border}{8mm}
+
 \newcommand{\TopBanner}[2]{
   \begin{tikzpicture}[remember picture,overlay]
     \node[
@@ -36,6 +41,19 @@
       minimum width=\paperwidth,
       minimum height=24mm,
     ] at ([yshift=-15mm] current page.north west) {#2};
+  \end{tikzpicture}
+}
+
+\newcommand{\CenterText}[1]{
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[
+      anchor=north west,
+      fill=lime,
+      text=#1,
+      align=left,
+      minimum width=\paperwidth-2*\border,
+      minimum height=36mm,
+    ] at ([yshift=-15mm-24mm-\border,xshift=\border] current page.south west) {\huge{#1}};
   \end{tikzpicture}
 }
 
@@ -64,11 +82,17 @@
 
 \newcommand{\StaticMaterial}[0]{
   \begin{tikzpicture}
-    \node at ([xshift=7cm,yshift=-3cm] current page.north west) {\includegraphics[scale=0.08]{figs/sdu.pdf}};
+    % SDU logo
+    \node[anchor=south west]
+      at ([xshift=\border,yshift=12mm+16mm+\border] current page.south west)
+      {\includegraphics[scale=0.08]{figs/sdu.pdf}};
     
-    \node at ([xshift=8cm,yshift=-5cm] current page.north west) {
-      \fancyqr[image padding=0,gradient=true,gradient angle=135,r color=teal,l color=purple]{https://conf.researchr.org/attending/icsa-2025/Program}
-    };
+    % QR code for program
+    \node[anchor=south east]
+      at ([xshift=-\border,yshift=12mm+16mm+\border] current page.south east)
+      {
+        \fancyqr[image padding=0,gradient=true,gradient angle=135,r color=teal, l color=purple]{https://conf.researchr.org/attending/icsa-2025/Program}
+      };
   \end{tikzpicture}
 }
 
