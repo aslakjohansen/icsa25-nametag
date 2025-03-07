@@ -49,7 +49,7 @@ defmodule Generator do
   defp datum_cleanaffil(datum) do
     affil =
       datum
-      |> Map.get(datum, "Company/Institution")
+      |> Map.get("Company/Institution")
       |> String.replace("&", "\\&", global: true)
       |> String.replace("¨a", "ä", global: true)
     
