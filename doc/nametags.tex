@@ -95,10 +95,15 @@
 
 \newcommand{\StaticMaterial}[0]{
   \begin{tikzpicture}[remember picture,overlay]
-    % SDU logo
+    % ICSA'25 logo
     \node[anchor=south west]
-      at ([xshift=\border,yshift=12mm+16mm+\border] current page.south west)
-      {\includegraphics[scale=0.08]{figs/sdu.pdf}};
+      at ([xshift=\border,yshift=12mm+16mm+\border-5.5mm] current page.south west)
+      {\includegraphics[scale=0.1]{figs/icsa25.pdf}};
+    
+    % SDU logo
+    \node[anchor=south]
+      at ([xshift=4mm,yshift=12mm+16mm+\border] current page.south)
+      {\includegraphics[scale=0.04]{figs/sdu.pdf}};
     
     % QR code for program
     \node[anchor=south east]
