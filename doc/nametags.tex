@@ -38,7 +38,7 @@
   \end{tikzpicture}
 }
 
-\newcommand{\BottomBanner}[1]{
+\newcommand{\BottomBanner}[2]{
   \begin{tikzpicture}[remember picture,overlay]
     \node[
       anchor=south west,
@@ -46,7 +46,7 @@
       text=white,
       minimum width=\paperwidth,
       minimum height=16mm,
-    ] at ([yshift=12mm] current page.south west) {};
+    ] at ([yshift=12mm] current page.south west) {\Huge{\textbf{#2}}};
   \end{tikzpicture}
 }
 \newcommand{\OptionBanner}[1]{
