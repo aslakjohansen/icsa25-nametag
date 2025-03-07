@@ -57,11 +57,23 @@ defmodule Generator do
   end
   
   defp datum2header(datum) do
-    case datum do
-      %{"Company/Institution" => "Mjølner Informatics"} -> "Mjølner Informatics"
-      %{"Participant category" => "ICSA Chair"} -> "ICSA Chair"
-      %{"Paper Title and Number" => paper} when paper != "" -> "Author"
-      %{"Participant category" => "Student Volunteer"} -> "Student Volunteer"
+    domain_invoice =
+      datum
+      |> Map.get("Invoice field E-mail")
+      |> String.split("@")
+      |> Enum.at(1)
+    domain =
+      datum
+      |> Map.get("E-mail")
+      |> String.split("@")
+      |> Enum.at(1)
+    case {datum, domain_invoice, domain} do
+      {%{"Company/Institution" => "Mjølner Informatics"}, _, _} -> "Mjølner Informatics"
+      {_, "mjolner.dk", _} -> "Mjølner Informatics"
+      {_, _, "mjolner.dk"} -> "Mjølner Informatics"
+      {%{"Participant category" => "ICSA Chair"}, _, _} -> "ICSA Chair"
+      {%{"Paper Title and Number" => paper}, _, _} when paper != "" -> "Author"
+      {%{"Participant category" => "Student Volunteer"}, _, _} -> "Student Volunteer"
       _ -> "Participant"
     end
   end
@@ -101,7 +113,7 @@ defmodule Script do
   def run() do
     "../data/ICSA.xlsx"
     |> Parser.parse()
-    |> (fn data -> [data |> Enum.at(147)] end).()
+#    |> (fn data -> [data |> Enum.at(147)] end).()
     |> Generator.generate()
     |> IO.puts()
   end
