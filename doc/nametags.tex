@@ -47,13 +47,18 @@
 \newcommand{\MainText}[2]{
   \begin{tikzpicture}[remember picture,overlay]
     \node[
+      overlay,
       anchor=north west,
-%      fill=lime,
       text=#1,
+      fill=lime, % for debugging
       align=left,
       minimum width=\paperwidth-2*\border,
-      minimum height=52mm,
-    ] at ([xshift=\border,yshift=-15mm-24mm-\border] current page.north west) {\large{#2}};
+    ] at ([xshift=\border,yshift=-15mm-24mm-\border] current page.north west) {
+      \begin{minipage}{85mm}
+        \raggedright
+        #2
+      \end{minipage}
+    };
   \end{tikzpicture}
 }
 

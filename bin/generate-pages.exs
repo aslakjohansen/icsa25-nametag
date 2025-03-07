@@ -64,7 +64,7 @@ defmodule Generator do
       \\TopBanner{#{color}}{#{name}}
       \\MainText{black}{
         #{name}
-        %\\\\
+        \\\\
         #{affil}
       }
       \\BottomBanner{#{color}}{#{ccat}}
@@ -81,7 +81,7 @@ defmodule Script do
   def run() do
     "../data/ICSA.xlsx"
     |> Parser.parse()
-    |> (fn data -> [data |> Enum.at(0)] end).()
+    |> (fn data -> [data |> Enum.at(147)] end).()
     |> Generator.generate()
     |> IO.puts()
   end
