@@ -26,6 +26,23 @@
 \definecolor{bluetext}{HTML}{2E73A3}
 \definecolor{grey}{HTML}{AFAFAF}
 
+\newcommand{\TopBanner}[2]{
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[
+      anchor=north west,
+      fill=#1,
+      text=white,
+      minimum width=\paperwidth,
+      minimum height=12mm,
+    ] at ([yshift=-15mm] current page.north west) {#2};
+  \end{tikzpicture}
+}
+\newcommand{\StaticMaterial}[0]{
+  \begin{tikzpicture}
+    \node at ([xshift=7cm,yshift=-3cm] current page.north west) {\includegraphics[scale=0.08]{figs/sdu.pdf}};
+  \end{tikzpicture}
+}
+
 \newenvironment{inspiration}[2][0.9]
 {
   \begin{center}

@@ -2,7 +2,10 @@
 
 defmodule Script do
   def run() do
-    "test"
+    """
+    \\StaticMaterial
+    \\TopBanner{purple}{Aslak Johansen}
+    """
     |> IO.puts()
   end
 end
