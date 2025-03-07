@@ -65,7 +65,7 @@ defmodule Generator do
       \\MainText{black}{
         #{name}
         \\\\
-        #{affil}
+        \\textcolor{#{color}}{#{affil}}
       }
       \\BottomBanner{#{color}}{#{ccat}}
       \\OptionBanner{#{color}}
