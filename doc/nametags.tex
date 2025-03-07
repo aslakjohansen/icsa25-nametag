@@ -81,7 +81,7 @@
 }
 
 \newcommand{\StaticMaterial}[0]{
-  \begin{tikzpicture}
+  \begin{tikzpicture}[remember picture,overlay]
     % SDU logo
     \node[anchor=south west]
       at ([xshift=\border,yshift=12mm+16mm+\border] current page.south west)
