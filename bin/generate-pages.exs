@@ -25,17 +25,40 @@ defmodule Parser do
 end
 
 defmodule Generator do
+  defp cleancat(cat) do
+    case String.split(cat, " - ") do
+      ["Full conference" = name|_] -> name
+      ["Main conference only" = name|_] -> name
+      ["ICSA Chair" = name|_] -> name
+      ["Workshops/tutorials" = name|[days|_]] -> name <>": "<>days
+      name -> name
+    end
+  end
+  
+  defp cat2color(ccat) do
+    case ccat do
+      "Full conference" -> "purple"
+      "Main conference only" -> "orange"
+      "ICSA Chair" -> "teal"
+      "Workshops/tutorials"<>_ -> "blue"
+      _ -> "black"
+    end
+  end
+  
   def generate(data) do
     IO.puts(inspect data)
     data
     |> Enum.map(fn datum ->
       name  = Map.get(datum, "First name")<>" "<>Map.get(datum, "Last name")
       _ident = Map.get(datum, "Participant ID")
+      cat = Map.get(datum, "Participant category")
+      ccat = cleancat(cat)
+      color = cat2color(ccat)
       
       """
       \\StaticMaterial
-      \\TopBanner{purple}{#{name}}
-      \\BottomBanner{purple}
+      \\TopBanner{#{color}}{#{name}}
+      \\BottomBanner{#{color}}
       \\newpage
       
       """
