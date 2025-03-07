@@ -99,7 +99,7 @@ defmodule Generator do
         \\\\
         \\textcolor{#{color}}{#{affil}}
       }
-      \\BottomBanner{#{color}}{}
+      %\\BottomBanner{#{color}}{}
       \\OptionBanner{#{color}}
       \\StaticMaterial
       \\OptionWSI

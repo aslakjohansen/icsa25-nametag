@@ -70,25 +70,25 @@
   \end{tikzpicture}
 }
 
-\newcommand{\BottomBanner}[2]{
+%\newcommand{\BottomBanner}[2]{
+%  \begin{tikzpicture}[remember picture,overlay]
+%    \node[
+%      anchor=south west,
+%      fill=#1,
+%      text=white,
+%      minimum width=\paperwidth,
+%      minimum height=16mm,
+%    ] at ([yshift=12mm] current page.south west) {\Huge{\textbf{#2}}};
+%  \end{tikzpicture}
+%}
+\newcommand{\OptionBanner}[1]{
   \begin{tikzpicture}[remember picture,overlay]
     \node[
       anchor=south west,
       fill=#1,
       text=white,
       minimum width=\paperwidth,
-      minimum height=16mm,
-    ] at ([yshift=12mm] current page.south west) {\Huge{\textbf{#2}}};
-  \end{tikzpicture}
-}
-\newcommand{\OptionBanner}[1]{
-  \begin{tikzpicture}[remember picture,overlay]
-    \node[
-      anchor=south west,
-      fill=#1!20,
-      text=white,
-      minimum width=\paperwidth,
-      minimum height=12mm,
+      minimum height=28mm,
     ] at (current page.south west) {};
   \end{tikzpicture}
 }
