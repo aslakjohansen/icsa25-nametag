@@ -18,4 +18,5 @@ pages.tex: ../bin/generate-pages.exs ../data/
 
 nametags.pdf: Makefile nametags.tex pages.tex
 	lualatex nametags.tex
+	lualatex nametags.tex
 
