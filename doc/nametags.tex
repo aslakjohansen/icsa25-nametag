@@ -37,6 +37,19 @@
     ] at ([yshift=-15mm] current page.north west) {#2};
   \end{tikzpicture}
 }
+
+\newcommand{\BottomBanner}[1]{
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[
+      anchor=south west,
+      fill=#1,
+      text=white,
+      minimum width=\paperwidth,
+      minimum height=12mm,
+    ] at ([yshift=15mm] current page.south west) {};
+  \end{tikzpicture}
+}
+
 \newcommand{\StaticMaterial}[0]{
   \begin{tikzpicture}
     \node at ([xshift=7cm,yshift=-3cm] current page.north west) {\includegraphics[scale=0.08]{figs/sdu.pdf}};

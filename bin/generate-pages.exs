@@ -5,6 +5,8 @@ defmodule Script do
     """
     \\StaticMaterial
     \\TopBanner{purple}{Aslak Johansen}
+    \\BottomBanner{purple}
+    \\newpage
     """
     |> IO.puts()
   end
