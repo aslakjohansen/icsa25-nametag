@@ -81,6 +81,7 @@ defmodule Generator do
   def generate(data) do
 #    IO.puts(inspect data)
     data
+    |> Enum.sort(&(Map.get(&1, "First name") <= Map.get(&2, "First name")))
     |> Enum.map(fn datum -> datum_cleanaffil(datum) end)
     |> Enum.map(fn datum ->
       name  = Map.get(datum, "First name")<>" "<>Map.get(datum, "Last name")
