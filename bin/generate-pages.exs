@@ -59,6 +59,7 @@ defmodule Generator do
       \\StaticMaterial
       \\TopBanner{#{color}}{#{name}}
       \\BottomBanner{#{color}}
+      \\OptionBanner{#{color}}
       \\newpage
       
       """
