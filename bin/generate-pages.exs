@@ -35,33 +35,53 @@ defmodule Generator do
     end
   end
   
-  defp cat2color(ccat) do
-    case ccat do
-      "Full conference" -> "purple"
-      "Main conference only" -> "orange"
-      "ICSA Chair" -> "teal"
-      "Workshops/tutorials"<>_ -> "blue"
+  defp header2color(header) do
+    case header do
+      "Mjølner Informatics" -> "orange"
+      "ICSA Chair" -> "purple"
+      "Author"<>_ -> "blue"
+      "Student Volunteer" -> "teal"
+      "Participant"<>_ -> "olive"
       _ -> "black"
+    end
+  end
+  
+  defp datum_cleanaffil(datum) do
+    affil =
+      datum
+      |> Map.get(datum, "Company/Institution")
+      |> String.replace("&", "\\&", global: true)
+      |> String.replace("¨a", "ä", global: true)
+    
+    Map.put(datum, "Company/Institution", affil)
+  end
+  
+  defp datum2header(datum) do
+    case datum do
+      %{"Company/Institution" => "Mjølner Informatics"} -> "Mjølner Informatics"
+      %{"Participant category" => "ICSA Chair"} -> "ICSA Chair"
+      %{"Paper Title and Number" => paper} when paper != "" -> "Author"
+      %{"Participant category" => "Student Volunteer"} -> "Student Volunteer"
+      _ -> "Participant"
     end
   end
   
   def generate(data) do
 #    IO.puts(inspect data)
     data
+    |> Enum.map(fn datum -> datum_cleanaffil(datum) end)
     |> Enum.map(fn datum ->
       name  = Map.get(datum, "First name")<>" "<>Map.get(datum, "Last name")
-      affil =
-        Map.get(datum, "Company/Institution")
-        |> String.replace("&", "\\&", global: true)
-        |> String.replace("¨a", "ä", global: true)
+      affil = Map.get(datum, "Company/Institution")
       _ident = Map.get(datum, "Participant ID")
       cat = Map.get(datum, "Participant category")
       ccat = cleancat(cat)
-      color = cat2color(ccat)
+      header = datum2header(datum)
+      color = header2color(header)
       
       """
       \\StaticMaterial
-      \\TopBanner{#{color}}{#{name}}
+      \\TopBanner{#{color}}{#{header}}
       \\MainText{black}{
         #{name}
         \\\\
