@@ -93,15 +93,23 @@ defmodule Generator do
       color = header2color(header)
       
       """
-      \\StaticMaterial
       \\TopBanner{#{color}}{#{header}}
       \\MainText{black}{
         #{name}
         \\\\
         \\textcolor{#{color}}{#{affil}}
       }
-      \\BottomBanner{#{color}}{#{ccat}}
+      \\BottomBanner{#{color}}{}
       \\OptionBanner{#{color}}
+      \\StaticMaterial
+      \\OptionWSI
+      \\OptionWSII
+      \\OptionConfI
+      \\OptionConfII
+      \\OptionConfIII
+      \\OptionTour
+      \\OptionReception
+      \\OptionGala{+1}
       \\newpage
       
       """

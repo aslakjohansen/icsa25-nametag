@@ -111,6 +111,104 @@
       {
         \fancyqr[image padding=0,gradient=true,gradient angle=135,r color=teal, l color=purple]{https://conf.researchr.org/attending/icsa-2025/Program}
       };
+    
+    % dates
+    \node[anchor=north,text=white]
+      at ([xshift=\border/2+(\paperwidth-\border)/5*0.5,yshift=12mm+16mm-\border/2] current page.south west)
+      {\sffamily Mon};
+    \node[anchor=north,text=white]
+      at ([xshift=\border/2+(\paperwidth-\border)/5*1.5,yshift=12mm+16mm-\border/2] current page.south west)
+      {\sffamily Tue};
+    \node[anchor=north,text=white]
+      at ([xshift=\border/2+(\paperwidth-\border)/5*2.5,yshift=12mm+16mm-\border/2] current page.south west)
+      {\sffamily Wed};
+    \node[anchor=north,text=white]
+      at ([xshift=\border/2+(\paperwidth-\border)/5*3.5,yshift=12mm+16mm-\border/2] current page.south west)
+      {\sffamily Thu};
+    \node[anchor=north,text=white]
+      at ([xshift=\border/2+(\paperwidth-\border)/5*4.5,yshift=12mm+16mm-\border/2] current page.south west)
+      {\sffamily Fri};
+  \end{tikzpicture}
+}
+
+\newcommand{\OptionWSI}[0]{
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[
+      rectangle,anchor=north,draw=white,text=white,rounded corners=1mm,
+      minimum height=6mm,minimum width=(\paperwidth-\border)/5,
+    ]
+      at ([xshift=\border/2+(\paperwidth-\border)/5*0.5,yshift=12mm+16mm-\border/2-6mm] current page.south west)
+      {\sffamily Workshop};
+  \end{tikzpicture}
+}
+\newcommand{\OptionWSII}[0]{
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[
+      rectangle,anchor=north,draw=white,text=white,rounded corners=1mm,
+      minimum height=6mm,minimum width=(\paperwidth-\border)/5,
+    ]
+      at ([xshift=\border/2+(\paperwidth-\border)/5*1.5,yshift=12mm+16mm-\border/2-6mm] current page.south west)
+      {\sffamily Workshop};
+  \end{tikzpicture}
+}
+\newcommand{\OptionConfI}[0]{
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[
+      rectangle,anchor=north,draw=white,text=white,rounded corners=1mm,
+      minimum height=6mm,minimum width=(\paperwidth-\border)/5,
+    ]
+      at ([xshift=\border/2+(\paperwidth-\border)/5*2.5,yshift=12mm+16mm-\border/2-6mm] current page.south west)
+      {\sffamily Conference};
+  \end{tikzpicture}
+}
+\newcommand{\OptionConfII}[0]{
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[
+      rectangle,anchor=north,draw=white,text=white,rounded corners=1mm,
+      minimum height=6mm,minimum width=(\paperwidth-\border)/5,
+    ]
+      at ([xshift=\border/2+(\paperwidth-\border)/5*3.5,yshift=12mm+16mm-\border/2-6mm] current page.south west)
+      {\sffamily Conference};
+  \end{tikzpicture}
+}
+\newcommand{\OptionConfIII}[0]{
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[
+      rectangle,anchor=north,draw=white,text=white,rounded corners=1mm,
+      minimum height=6mm,minimum width=(\paperwidth-\border)/5,
+    ]
+      at ([xshift=\border/2+(\paperwidth-\border)/5*4.5,yshift=12mm+16mm-\border/2-6mm] current page.south west)
+      {\sffamily Conference};
+  \end{tikzpicture}
+}
+\newcommand{\OptionTour}[0]{
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[
+      rectangle,anchor=north,draw=white,text=white,rounded corners=1mm,
+      minimum height=6mm,minimum width=(\paperwidth-\border)/5,
+    ]
+      at ([xshift=\border/2+(\paperwidth-\border)/5*2.5,yshift=12mm+16mm-\border/2-6mm*2] current page.south west)
+      {\sffamily City Tour};
+  \end{tikzpicture}
+}
+\newcommand{\OptionReception}[0]{
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[
+      rectangle,anchor=north,draw=white,text=white,rounded corners=1mm,
+      minimum height=6mm,minimum width=(\paperwidth-\border)/5,
+    ]
+      at ([xshift=\border/2+(\paperwidth-\border)/5*2.5,yshift=12mm+16mm-\border/2-6mm*3] current page.south west)
+      {\sffamily Reception};
+  \end{tikzpicture}
+}
+\newcommand{\OptionGala}[1]{
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[
+      rectangle,anchor=north,draw=white,text=white,rounded corners=1mm,
+      minimum height=6mm,minimum width=(\paperwidth-\border)/5,
+    ]
+      at ([xshift=\border/2+(\paperwidth-\border)/5*3.5,yshift=12mm+16mm-\border/2-6mm*2] current page.south west)
+      {\sffamily Gala#1};
   \end{tikzpicture}
 }
 
