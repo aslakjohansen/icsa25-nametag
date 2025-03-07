@@ -62,9 +62,9 @@ defmodule Generator do
       """
       \\StaticMaterial
       \\TopBanner{#{color}}{#{name}}
-      \\CenterText{#{color}}{
+      \\MainText{black}{
         #{name}
-        \\\\
+        %\\\\
         #{affil}
       }
       \\BottomBanner{#{color}}{#{ccat}}

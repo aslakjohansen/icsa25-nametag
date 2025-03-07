@@ -44,16 +44,16 @@
   \end{tikzpicture}
 }
 
-\newcommand{\CenterText}[1]{
+\newcommand{\MainText}[2]{
   \begin{tikzpicture}[remember picture,overlay]
     \node[
       anchor=north west,
-      fill=lime,
+%      fill=lime,
       text=#1,
       align=left,
       minimum width=\paperwidth-2*\border,
-      minimum height=36mm,
-    ] at ([yshift=-15mm-24mm-\border,xshift=\border] current page.south west) {\huge{#1}};
+      minimum height=52mm,
+    ] at ([xshift=\border,yshift=-15mm-24mm-\border] current page.north west) {\large{#2}};
   \end{tikzpicture}
 }
 
@@ -94,19 +94,6 @@
         \fancyqr[image padding=0,gradient=true,gradient angle=135,r color=teal, l color=purple]{https://conf.researchr.org/attending/icsa-2025/Program}
       };
   \end{tikzpicture}
-}
-
-\newenvironment{inspiration}[2][0.9]
-{
-  \begin{center}
-  \newcommand{\saveme}{#2}
-  \begin{minipagewithmarginpars}{#1\textwidth}
-}
-{
-  
-  \raggedleft{--- \textsl{\saveme}}
-  \end{minipagewithmarginpars}
-  \end{center}
 }
 
 \pagenumbering{gobble}
