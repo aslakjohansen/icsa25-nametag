@@ -95,6 +95,23 @@
 
 \newcommand{\StaticMaterial}[0]{
   \begin{tikzpicture}[remember picture,overlay]
+    % sponsors
+    \node[anchor=center,text=black]
+      at ([xshift=\border/2+(\paperwidth-\border)/5*0.5,yshift=-15mm/2] current page.north west)
+      {\textsl{sponsor 1}};
+    \node[anchor=center,text=black]
+      at ([xshift=\border/2+(\paperwidth-\border)/5*1.5,yshift=-15mm/2] current page.north west)
+      {\textsl{sponsor 2}};
+%    \node[anchor=center,text=black]
+%      at ([xshift=\border/2+(\paperwidth-\border)/5*2.5,yshift=-15mm/4] current page.north west)
+%      {\textsl{sponsor}};
+    \node[anchor=center,text=black]
+      at ([xshift=\border/2+(\paperwidth-\border)/5*3.5,yshift=-15mm/2] current page.north west)
+      {\textsl{sponsor 3}};
+    \node[anchor=center,text=black]
+      at ([xshift=\border/2+(\paperwidth-\border)/5*4.5,yshift=-15mm/2] current page.north west)
+      {\textsl{sponsor 4}};
+    
     % ICSA'25 logo
     \node[anchor=south west]
       at ([xshift=\border,yshift=12mm+16mm+\border-5.5mm] current page.south west)
