@@ -69,6 +69,7 @@ defmodule Generator do
       |> String.split("@")
       |> Enum.at(1)
     case {datum, domain_invoice, domain} do
+      {%{"Participant category" => "Mjolner Informatics - no fee"}, _, _} -> "Mjølner Informatics"
       {%{"Company/Institution" => "Mjølner Informatics"}, _, _} -> "Mjølner Informatics"
       {_, "mjolner.dk", _} -> "Mjølner Informatics"
       {_, _, "mjolner.dk"} -> "Mjølner Informatics"
