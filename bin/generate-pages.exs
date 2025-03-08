@@ -37,9 +37,9 @@ defmodule Generator do
   
   defp header2color(header) do
     case header do
-      "Mjølner Informatics" -> "orange"
+      "Mjølner Informatics" -> "orange!80!black"
       "ICSA Chair" -> "purple"
-      "Author"<>_ -> "blue"
+      "Author"<>_ -> "blue!80"
       "Student Volunteer" -> "teal"
       "Participant"<>_ -> "olive"
       _ -> "black"
