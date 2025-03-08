@@ -78,6 +78,22 @@ defmodule Generator do
     end
   end
   
+  defp datum2days(datum) do
+    cat = Map.get(datum, "Participant category")
+    cond do
+      cat =~ ~r/Data Science Day/i -> {false, true, false, false, false}
+      cat =~ ~r/Full conference/i -> {true, true, true, true, true}
+      cat =~ ~r/ICSA Chair/i -> {true, true, true, true, true}
+      cat =~ ~r/Main conference only/i -> {false, false, true, true, true}
+      cat =~ ~r/Mjolner Informatics/i -> {true, true, true, true, true}
+      cat =~ ~r/SDU Organizers/i -> {true, true, true, true, true}
+      cat =~ ~r/Speaker/i -> {true, true, true, true, true}
+      cat =~ ~r/March 31st/i -> {true, false, false, false, false}
+      cat =~ ~r/April 1st/i -> {false, true, false, false, false}
+      cat =~ ~r/2 days/i -> {true, true, false, false, false}
+    end
+  end
+  
   def generate(data) do
 #    IO.puts(inspect data)
     data
@@ -88,10 +104,18 @@ defmodule Generator do
       affil = Map.get(datum, "Company/Institution")
       _ident = Map.get(datum, "Participant ID")
       cat = Map.get(datum, "Participant category")
-      ccat = cleancat(cat)
+      _ccat = cleancat(cat)
       header = datum2header(datum)
       color = header2color(header)
+      {ws1, ws2, conf1, conf2, conf3} = datum2days(datum)
       reception = Map.get(datum, "Options Reception Yes - I will participate in the ICSA reception")
+      tour = Map.get(datum, "Options City tour Yes - I would like to participate in the city tour")
+      gala = Map.get(datum, "Options Gala dinner - free ticket. I would like to attend the gala dinner.")
+      plus =
+        case Map.get(datum, "Options Additional tickets for Gala Dinner Select amount of additional Gala Dinner tickets") do
+          "" -> ""
+          num -> "+"<>num
+        end
       
       """
       \\TopBanner{#{color}}{#{header}}
@@ -103,14 +127,14 @@ defmodule Generator do
       %\\BottomBanner{#{color}}{}
       \\OptionBanner{#{color}}
       \\StaticMaterial
-      \\OptionWSI
-      \\OptionWSII
-      \\OptionConfI
-      \\OptionConfII
-      \\OptionConfIII
-      \\OptionTour
+      #{if ws1 do "" else "%" end}\\OptionWSI
+      #{if ws2 do "" else "%" end}\\OptionWSII
+      #{if conf1 do "" else "%" end}\\OptionConfI
+      #{if conf2 do "" else "%" end}\\OptionConfII
+      #{if conf3 do "" else "%" end}\\OptionConfIII
+      #{if tour=="1" do "" else "%" end}\\OptionTour
       #{if reception=="1" do "" else "%" end}\\OptionReception
-      \\OptionGala{+1}
+      #{if gala=="1" do "" else "%" end}\\OptionGala{#{plus}}
       \\newpage
       
       """
@@ -123,7 +147,7 @@ defmodule Script do
   def run() do
     "../data/ICSA.xlsx"
     |> Parser.parse()
-    |> (fn data -> [data |> Enum.at(147)] end).()
+#    |> (fn data -> [data |> Enum.at(147)] end).()
     |> Generator.generate()
     |> IO.puts()
   end
