@@ -38,11 +38,12 @@ defmodule Generator do
   defp header2color(header) do
     case header do
       "Mjølner Informatics" -> "orange!80!black"
-      "ICSA Chair" -> "purple"
+      "ICSA Chair" -> "black"
+      "ICSA Organizer" -> "purple"
       "Author"<>_ -> "blue!80"
       "Student Volunteer" -> "teal"
       "Participant"<>_ -> "olive"
-      _ -> "black"
+      _ -> "pink"
     end
   end
   
@@ -72,6 +73,7 @@ defmodule Generator do
       {_, "mjolner.dk", _} -> "Mjølner Informatics"
       {_, _, "mjolner.dk"} -> "Mjølner Informatics"
       {%{"Participant category" => "ICSA Chair"}, _, _} -> "ICSA Chair"
+      {%{"Participant category" => "SDU Organizers - no fee"}, _, _} -> "ICSA Organizer"
       {%{"Paper Title and Number" => paper}, _, _} when paper != "" -> "Author"
       {%{"Participant category" => "Student Volunteer"}, _, _} -> "Student Volunteer"
       _ -> "Participant"
