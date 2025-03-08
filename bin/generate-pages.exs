@@ -91,6 +91,7 @@ defmodule Generator do
       ccat = cleancat(cat)
       header = datum2header(datum)
       color = header2color(header)
+      reception = Map.get(datum, "Options Reception Yes - I will participate in the ICSA reception")
       
       """
       \\TopBanner{#{color}}{#{header}}
@@ -108,7 +109,7 @@ defmodule Generator do
       \\OptionConfII
       \\OptionConfIII
       \\OptionTour
-      \\OptionReception
+      #{if reception=="1" do "" else "%" end}\\OptionReception
       \\OptionGala{+1}
       \\newpage
       
