@@ -33,10 +33,13 @@
 \newcommand{\border}{8mm}
 \newcommand{\margin}{3mm}
 
+\newcommand{\OptionHeight}{28mm}
 \newcommand{\SponsorColCenter}[1]{\border/2+(\paperwidth-\border)/5*(#1+0.5)}
-\newcommand{\ColCenter}[1]{2*\margin+(\paperwidth-4*\margin)/5*(#1+0.5)}
-\newcommand{\RowNorth}[1]{12mm+16mm-\border/4-6mm*#1}
 \newcommand{\CellWidth}{(\paperwidth-4*\margin)/5}
+\newcommand{\CellHeight}{(\OptionHeight-3*\margin)/4}
+\newcommand{\CellTransform}[1]{\sffamily \scalebox{0.75}{#1}}
+\newcommand{\ColCenter}[1]{2*\margin+(\paperwidth-4*\margin)/5*(#1+0.5)}
+\newcommand{\RowNorth}[1]{12mm+16mm-\border/4-\CellHeight*#1}
 
 \newcommand{\TopBanner}[2]{
   \begin{tikzpicture}[remember picture,overlay]
@@ -90,12 +93,12 @@
 \newcommand{\OptionBanner}[1]{
   \begin{tikzpicture}[remember picture,overlay]
     \draw[fill=#1]
-         ([xshift= \margin,yshift=28mm] current page.south west)
+         ([xshift= \margin,yshift=\OptionHeight] current page.south west)
       [rounded corners=6mm/1.4142135624] % \sqrt{2} = 1.4142135624
       -- ([xshift= \margin,yshift=\margin] current page.south west)
       -- ([xshift=-\margin,yshift=\margin] current page.south east)
       [sharp corners]
-      -- ([xshift=-\margin,yshift=28mm] current page.south east)
+      -- ([xshift=-\margin,yshift=\OptionHeight] current page.south east)
       -- cycle
     ;
   \end{tikzpicture}
@@ -166,80 +169,80 @@
   \begin{tikzpicture}[remember picture,overlay]
     \node[
       rectangle,anchor=north,draw=white,text=white,rounded corners=1mm,thick,
-      minimum height=6mm,minimum width=\CellWidth,
+      minimum height=\CellHeight,minimum width=\CellWidth,
     ]
       at ([xshift=\ColCenter{0},yshift=\RowNorth{1}] current page.south west)
-      {\sffamily Workshop};
+      {\CellTransform{Workshop}};
   \end{tikzpicture}
 }
 \newcommand{\OptionWSII}[0]{
   \begin{tikzpicture}[remember picture,overlay]
     \node[
       rectangle,anchor=north,draw=white,text=white,rounded corners=1mm,thick,
-      minimum height=6mm,minimum width=\CellWidth,
+      minimum height=\CellHeight,minimum width=\CellWidth,
     ]
       at ([xshift=\ColCenter{1},yshift=\RowNorth{1}] current page.south west)
-      {\sffamily Workshop};
+      {\CellTransform{Workshop}};
   \end{tikzpicture}
 }
 \newcommand{\OptionConfI}[0]{
   \begin{tikzpicture}[remember picture,overlay]
     \node[
       rectangle,anchor=north,draw=white,text=white,rounded corners=1mm,thick,
-      minimum height=6mm,minimum width=\CellWidth,
+      minimum height=\CellHeight,minimum width=\CellWidth,
     ]
       at ([xshift=\ColCenter{2},yshift=\RowNorth{1}] current page.south west)
-      {\sffamily Conference};
+      {\CellTransform{Conference}};
   \end{tikzpicture}
 }
 \newcommand{\OptionConfII}[0]{
   \begin{tikzpicture}[remember picture,overlay]
     \node[
       rectangle,anchor=north,draw=white,text=white,rounded corners=1mm,thick,
-      minimum height=6mm,minimum width=\CellWidth/5,
+      minimum height=\CellHeight,minimum width=\CellWidth,
     ]
       at ([xshift=\ColCenter{3},yshift=\RowNorth{1}] current page.south west)
-      {\sffamily Conference};
+      {\CellTransform{Conference}};
   \end{tikzpicture}
 }
 \newcommand{\OptionConfIII}[0]{
   \begin{tikzpicture}[remember picture,overlay]
     \node[
       rectangle,anchor=north,draw=white,text=white,rounded corners=1mm,thick,
-      minimum height=6mm,minimum width=\CellWidth,
+      minimum height=\CellHeight,minimum width=\CellWidth,
     ]
       at ([xshift=\ColCenter{4},yshift=\RowNorth{1}] current page.south west)
-      {\sffamily Conference};
+      {\CellTransform{Conference}};
   \end{tikzpicture}
 }
 \newcommand{\OptionTour}[0]{
   \begin{tikzpicture}[remember picture,overlay]
     \node[
       rectangle,anchor=north,draw=white,text=white,rounded corners=1mm,thick,
-      minimum height=6mm,minimum width=\CellWidth,
+      minimum height=\CellHeight,minimum width=\CellWidth,
     ]
       at ([xshift=\ColCenter{2},yshift=\RowNorth{2}] current page.south west)
-      {\sffamily City Tour};
+      {\CellTransform{City Tour}};
   \end{tikzpicture}
 }
 \newcommand{\OptionReception}[0]{
   \begin{tikzpicture}[remember picture,overlay]
     \node[
       rectangle,anchor=north,draw=white,text=white,rounded corners=1mm,thick,
-      minimum height=6mm,minimum width=\CellWidth,
+      minimum height=\CellHeight,minimum width=\CellWidth,
     ]
       at ([xshift=\ColCenter{2},yshift=\RowNorth{3}] current page.south west)
-      {\sffamily Reception};
+      {\CellTransform{Reception}};
   \end{tikzpicture}
 }
 \newcommand{\OptionGala}[1]{
   \begin{tikzpicture}[remember picture,overlay]
     \node[
       rectangle,anchor=north,draw=white,text=white,rounded corners=1mm,thick,
-      minimum height=6mm,minimum width=\CellWidth,
+      minimum height=\CellHeight,minimum width=\CellWidth,
     ]
       at ([xshift=\ColCenter{3},yshift=\RowNorth{2}] current page.south west)
-      {\sffamily Gala#1};
+      {\CellTransform{Gala#1}};
   \end{tikzpicture}
 }
 
