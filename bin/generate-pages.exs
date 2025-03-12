@@ -89,7 +89,10 @@ defmodule Generator do
   
   defp datum2days(datum) do
     cat = Map.get(datum, "Participant category")
+    subcat = Map.get(datum, "Participation category")
     cond do
+      subcat =~ ~r/Full conference/i -> {true, true, true, true, true}
+      subcat =~ ~r/Workshop, 1 day/i -> {false, false, false, true, false}
       cat =~ ~r/Data Science Day/i -> {false, true, false, false, false}
       cat =~ ~r/Full conference/i -> {true, true, true, true, true}
       cat =~ ~r/ICSA Chair/i -> {true, true, true, true, true}
