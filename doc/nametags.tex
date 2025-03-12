@@ -33,9 +33,10 @@
 \newcommand{\border}{8mm}
 \newcommand{\margin}{3mm}
 
-\newcommand{\ColCenter}[1]{\border/2+(\paperwidth-\border)/5*(#1+0.5)}
 \newcommand{\SponsorColCenter}[1]{\border/2+(\paperwidth-\border)/5*(#1+0.5)}
+\newcommand{\ColCenter}[1]{2*\margin+(\paperwidth-4*\margin)/5*(#1+0.5)}
 \newcommand{\RowNorth}[1]{12mm+16mm-\border/4-6mm*#1}
+\newcommand{\CellWidth}{(\paperwidth-4*\margin)/5}
 
 \newcommand{\TopBanner}[2]{
   \begin{tikzpicture}[remember picture,overlay]
@@ -165,7 +166,7 @@
   \begin{tikzpicture}[remember picture,overlay]
     \node[
       rectangle,anchor=north,draw=white,text=white,rounded corners=1mm,thick,
-      minimum height=6mm,minimum width=(\paperwidth-\border)/5,
+      minimum height=6mm,minimum width=\CellWidth,
     ]
       at ([xshift=\ColCenter{0},yshift=\RowNorth{1}] current page.south west)
       {\sffamily Workshop};
@@ -175,7 +176,7 @@
   \begin{tikzpicture}[remember picture,overlay]
     \node[
       rectangle,anchor=north,draw=white,text=white,rounded corners=1mm,thick,
-      minimum height=6mm,minimum width=(\paperwidth-\border)/5,
+      minimum height=6mm,minimum width=\CellWidth,
     ]
       at ([xshift=\ColCenter{1},yshift=\RowNorth{1}] current page.south west)
       {\sffamily Workshop};
@@ -185,7 +186,7 @@
   \begin{tikzpicture}[remember picture,overlay]
     \node[
       rectangle,anchor=north,draw=white,text=white,rounded corners=1mm,thick,
-      minimum height=6mm,minimum width=(\paperwidth-\border)/5,
+      minimum height=6mm,minimum width=\CellWidth,
     ]
       at ([xshift=\ColCenter{2},yshift=\RowNorth{1}] current page.south west)
       {\sffamily Conference};
@@ -195,7 +196,7 @@
   \begin{tikzpicture}[remember picture,overlay]
     \node[
       rectangle,anchor=north,draw=white,text=white,rounded corners=1mm,thick,
-      minimum height=6mm,minimum width=(\paperwidth-\border)/5,
+      minimum height=6mm,minimum width=\CellWidth/5,
     ]
       at ([xshift=\ColCenter{3},yshift=\RowNorth{1}] current page.south west)
       {\sffamily Conference};
@@ -205,7 +206,7 @@
   \begin{tikzpicture}[remember picture,overlay]
     \node[
       rectangle,anchor=north,draw=white,text=white,rounded corners=1mm,thick,
-      minimum height=6mm,minimum width=(\paperwidth-\border)/5,
+      minimum height=6mm,minimum width=\CellWidth,
     ]
       at ([xshift=\ColCenter{4},yshift=\RowNorth{1}] current page.south west)
       {\sffamily Conference};
@@ -215,7 +216,7 @@
   \begin{tikzpicture}[remember picture,overlay]
     \node[
       rectangle,anchor=north,draw=white,text=white,rounded corners=1mm,thick,
-      minimum height=6mm,minimum width=(\paperwidth-\border)/5,
+      minimum height=6mm,minimum width=\CellWidth,
     ]
       at ([xshift=\ColCenter{2},yshift=\RowNorth{2}] current page.south west)
       {\sffamily City Tour};
@@ -225,7 +226,7 @@
   \begin{tikzpicture}[remember picture,overlay]
     \node[
       rectangle,anchor=north,draw=white,text=white,rounded corners=1mm,thick,
-      minimum height=6mm,minimum width=(\paperwidth-\border)/5,
+      minimum height=6mm,minimum width=\CellWidth,
     ]
       at ([xshift=\ColCenter{2},yshift=\RowNorth{3}] current page.south west)
       {\sffamily Reception};
@@ -235,7 +236,7 @@
   \begin{tikzpicture}[remember picture,overlay]
     \node[
       rectangle,anchor=north,draw=white,text=white,rounded corners=1mm,thick,
-      minimum height=6mm,minimum width=(\paperwidth-\border)/5,
+      minimum height=6mm,minimum width=\CellWidth,
     ]
       at ([xshift=\ColCenter{3},yshift=\RowNorth{2}] current page.south west)
       {\sffamily Gala#1};
