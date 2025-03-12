@@ -92,7 +92,7 @@
 %}
 \newcommand{\OptionBanner}[1]{
   \begin{tikzpicture}[remember picture,overlay]
-    \draw[fill=#1]
+    \draw[fill=#1,draw=none]
          ([xshift= \margin,yshift=\OptionHeight] current page.south west)
       [rounded corners=6mm/1.4142135624] % \sqrt{2} = 1.4142135624
       -- ([xshift= \margin,yshift=\margin] current page.south west)
