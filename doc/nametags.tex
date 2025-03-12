@@ -84,13 +84,6 @@
 %}
 \newcommand{\OptionBanner}[1]{
   \begin{tikzpicture}[remember picture,overlay]
-%    \node[
-%      anchor=south west,
-%      fill=#1,
-%      text=white,
-%      minimum width=\paperwidth,
-%      minimum height=28mm,
-%    ] at (current page.south west) {};
     \draw[fill=#1]
          ([xshift= \margin,yshift=28mm] current page.south west)
       [rounded corners=6mm/1.4142135624] % \sqrt{2} = 1.4142135624
