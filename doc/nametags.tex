@@ -33,6 +33,8 @@
 \newcommand{\border}{8mm}
 \newcommand{\margin}{3mm}
 
+\newcommand{\ColCenter}[1]{\border/2+(\paperwidth-\border)/5*(#1+0.5)}
+
 \newcommand{\TopBanner}[2]{
   \begin{tikzpicture}[remember picture,overlay]
     \node[
@@ -100,19 +102,19 @@
   \begin{tikzpicture}[remember picture,overlay]
     % sponsors
     \node[anchor=center,text=black]
-      at ([xshift=\border/2+(\paperwidth-\border)/5*0.5,yshift=-15mm/2] current page.north west)
+      at ([xshift=\ColCenter{0},yshift=-15mm/2] current page.north west)
       {\textsl{sponsor 1}};
     \node[anchor=center,text=black]
-      at ([xshift=\border/2+(\paperwidth-\border)/5*1.5,yshift=-15mm/2] current page.north west)
+      at ([xshift=\ColCenter{1},yshift=-15mm/2] current page.north west)
       {\textsl{sponsor 2}};
 %    \node[anchor=center,text=black]
-%      at ([xshift=\border/2+(\paperwidth-\border)/5*2.5,yshift=-15mm/4] current page.north west)
+%      at ([xshift=\ColCenter{2},yshift=-15mm/4] current page.north west)
 %      {\textsl{sponsor}};
     \node[anchor=center,text=black]
-      at ([xshift=\border/2+(\paperwidth-\border)/5*3.5,yshift=-15mm/2] current page.north west)
+      at ([xshift=\ColCenter{3},yshift=-15mm/2] current page.north west)
       {\includegraphics[scale=0.05]{figs/umbraco_logo_blue_horizontal.pdf}};
     \node[anchor=center,text=black]
-      at ([xshift=\border/2+(\paperwidth-\border)/5*4.5,yshift=-15mm/2] current page.north west)
+      at ([xshift=\ColCenter{4},yshift=-15mm/2] current page.north west)
       {\includegraphics[scale=0.03]{figs/sdu.pdf}};
     
     % ICSA'25 logo
@@ -140,19 +142,19 @@
     
     % dates
     \node[anchor=north,text=white]
-      at ([xshift=\border/2+(\paperwidth-\border)/5*0.5,yshift=12mm+16mm-\border/4] current page.south west)
+      at ([xshift=\ColCenter{0},yshift=12mm+16mm-\border/4] current page.south west)
       {\sffamily \textbf{Mon}};
     \node[anchor=north,text=white]
-      at ([xshift=\border/2+(\paperwidth-\border)/5*1.5,yshift=12mm+16mm-\border/4] current page.south west)
+      at ([xshift=\ColCenter{1},yshift=12mm+16mm-\border/4] current page.south west)
       {\sffamily \textbf{Tue}};
     \node[anchor=north,text=white]
-      at ([xshift=\border/2+(\paperwidth-\border)/5*2.5,yshift=12mm+16mm-\border/4] current page.south west)
+      at ([xshift=\ColCenter{2},yshift=12mm+16mm-\border/4] current page.south west)
       {\sffamily \textbf{Wed}};
     \node[anchor=north,text=white]
-      at ([xshift=\border/2+(\paperwidth-\border)/5*3.5,yshift=12mm+16mm-\border/4] current page.south west)
+      at ([xshift=\ColCenter{3},yshift=12mm+16mm-\border/4] current page.south west)
       {\sffamily \textbf{Thu}};
     \node[anchor=north,text=white]
-      at ([xshift=\border/2+(\paperwidth-\border)/5*4.5,yshift=12mm+16mm-\border/4] current page.south west)
+      at ([xshift=\ColCenter{4},yshift=12mm+16mm-\border/4] current page.south west)
       {\sffamily \textbf{Fri}};
   \end{tikzpicture}
 }
@@ -163,7 +165,7 @@
       rectangle,anchor=north,draw=white,text=white,rounded corners=1mm,thick,
       minimum height=6mm,minimum width=(\paperwidth-\border)/5,
     ]
-      at ([xshift=\border/2+(\paperwidth-\border)/5*0.5,yshift=12mm+16mm-\border/4-6mm] current page.south west)
+      at ([xshift=\ColCenter{0},yshift=12mm+16mm-\border/4-6mm] current page.south west)
       {\sffamily Workshop};
   \end{tikzpicture}
 }
@@ -173,7 +175,7 @@
       rectangle,anchor=north,draw=white,text=white,rounded corners=1mm,thick,
       minimum height=6mm,minimum width=(\paperwidth-\border)/5,
     ]
-      at ([xshift=\border/2+(\paperwidth-\border)/5*1.5,yshift=12mm+16mm-\border/4-6mm] current page.south west)
+      at ([xshift=\ColCenter{1},yshift=12mm+16mm-\border/4-6mm] current page.south west)
       {\sffamily Workshop};
   \end{tikzpicture}
 }
@@ -183,7 +185,7 @@
       rectangle,anchor=north,draw=white,text=white,rounded corners=1mm,thick,
       minimum height=6mm,minimum width=(\paperwidth-\border)/5,
     ]
-      at ([xshift=\border/2+(\paperwidth-\border)/5*2.5,yshift=12mm+16mm-\border/4-6mm] current page.south west)
+      at ([xshift=\ColCenter{2},yshift=12mm+16mm-\border/4-6mm] current page.south west)
       {\sffamily Conference};
   \end{tikzpicture}
 }
@@ -193,7 +195,7 @@
       rectangle,anchor=north,draw=white,text=white,rounded corners=1mm,thick,
       minimum height=6mm,minimum width=(\paperwidth-\border)/5,
     ]
-      at ([xshift=\border/2+(\paperwidth-\border)/5*3.5,yshift=12mm+16mm-\border/4-6mm] current page.south west)
+      at ([xshift=\ColCenter{3},yshift=12mm+16mm-\border/4-6mm] current page.south west)
       {\sffamily Conference};
   \end{tikzpicture}
 }
@@ -203,7 +205,7 @@
       rectangle,anchor=north,draw=white,text=white,rounded corners=1mm,thick,
       minimum height=6mm,minimum width=(\paperwidth-\border)/5,
     ]
-      at ([xshift=\border/2+(\paperwidth-\border)/5*4.5,yshift=12mm+16mm-\border/4-6mm] current page.south west)
+      at ([xshift=\ColCenter{4},yshift=12mm+16mm-\border/4-6mm] current page.south west)
       {\sffamily Conference};
   \end{tikzpicture}
 }
@@ -213,7 +215,7 @@
       rectangle,anchor=north,draw=white,text=white,rounded corners=1mm,thick,
       minimum height=6mm,minimum width=(\paperwidth-\border)/5,
     ]
-      at ([xshift=\border/2+(\paperwidth-\border)/5*2.5,yshift=12mm+16mm-\border/4-6mm*2] current page.south west)
+      at ([xshift=\ColCenter{2},yshift=12mm+16mm-\border/4-6mm*2] current page.south west)
       {\sffamily City Tour};
   \end{tikzpicture}
 }
@@ -223,7 +225,7 @@
       rectangle,anchor=north,draw=white,text=white,rounded corners=1mm,thick,
       minimum height=6mm,minimum width=(\paperwidth-\border)/5,
     ]
-      at ([xshift=\border/2+(\paperwidth-\border)/5*2.5,yshift=12mm+16mm-\border/4-6mm*3] current page.south west)
+      at ([xshift=\ColCenter{2},yshift=12mm+16mm-\border/4-6mm*3] current page.south west)
       {\sffamily Reception};
   \end{tikzpicture}
 }
@@ -233,7 +235,7 @@
       rectangle,anchor=north,draw=white,text=white,rounded corners=1mm,thick,
       minimum height=6mm,minimum width=(\paperwidth-\border)/5,
     ]
-      at ([xshift=\border/2+(\paperwidth-\border)/5*3.5,yshift=12mm+16mm-\border/4-6mm*2] current page.south west)
+      at ([xshift=\ColCenter{3},yshift=12mm+16mm-\border/4-6mm*2] current page.south west)
       {\sffamily Gala#1};
   \end{tikzpicture}
 }
