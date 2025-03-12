@@ -36,12 +36,15 @@ defmodule Generator do
   end
   
   defp header2color(header) do
+    sponsor_color = "orange!80!black"
     case header do
-      "Mjølner Informatics" -> "orange!80!black"
+      "Mjølner Informatics" -> sponsor_color
+      "DDSA" -> sponsor_color
       "ICSA Chair" -> "black"
       "ICSA Organizer" -> "purple"
+      "ICSA Staff" -> "purple"
       "Author"<>_ -> "blue!80"
-      "Student Volunteer" -> "teal"
+      "Gala Participant" -> "teal"
       "Participant"<>_ -> "olive"
       _ -> "pink"
     end
@@ -73,10 +76,13 @@ defmodule Generator do
       {%{"Company/Institution" => "Mjølner Informatics"}, _, _} -> "Mjølner Informatics"
       {_, "mjolner.dk", _} -> "Mjølner Informatics"
       {_, _, "mjolner.dk"} -> "Mjølner Informatics"
+      {%{"Participant category" => "Danish Data Science Academy"}, _, _} -> "DDSA"
       {%{"Participant category" => "ICSA Chair"}, _, _} -> "ICSA Chair"
       {%{"Participant category" => "SDU Organizers - no fee"}, _, _} -> "ICSA Organizer"
       {%{"Paper Title and Number" => paper}, _, _} when paper != "" -> "Author"
-      {%{"Participant category" => "Student Volunteer"}, _, _} -> "Student Volunteer"
+      {%{"Participant category" => "Student Volunteer"}, _, _} -> "ICSA Staff"
+      {%{"Participant category" => "ICSA Staff"}, _, _} -> "ICSA Staff"
+      {%{"Participant category" => "Gala Dinner"}, _, _} -> "Gala Participant"
       _ -> "Participant"
     end
   end
@@ -93,7 +99,9 @@ defmodule Generator do
       cat =~ ~r/Speaker/i -> {true, true, true, true, true}
       cat =~ ~r/March 31st/i -> {true, false, false, false, false}
       cat =~ ~r/April 1st/i -> {false, true, false, false, false}
+      cat =~ ~r/Danish Data Science Academy/i -> {false, true, false, false, false}
       cat =~ ~r/2 days/i -> {true, true, false, false, false}
+      cat =~ ~r/Gala Dinner/i -> {false, false, false, false, false}
     end
   end
   
@@ -107,13 +115,17 @@ defmodule Generator do
       affil = Map.get(datum, "Company/Institution")
       _ident = Map.get(datum, "Participant ID")
       cat = Map.get(datum, "Participant category")
-      _ccat = cleancat(cat)
       header = datum2header(datum)
       color = header2color(header)
       {ws1, ws2, conf1, conf2, conf3} = datum2days(datum)
       reception = Map.get(datum, "Options Reception Yes - I will participate in the ICSA reception")
       tour = Map.get(datum, "Options City tour Yes - I would like to participate in the city tour")
-      gala = Map.get(datum, "Options Gala dinner - free ticket. I would like to attend the gala dinner.")
+      gala =
+        cond do
+          Map.get(datum, "Options Gala dinner - free ticket. I would like to attend the gala dinner.")=="1" -> true
+          header=="Gala Participant" -> true
+          true -> false
+        end
       plus =
         case Map.get(datum, "Options Additional tickets for Gala Dinner Select amount of additional Gala Dinner tickets") do
           "" -> ""
@@ -137,7 +149,7 @@ defmodule Generator do
       #{if conf3 do "" else "%" end}\\OptionConfIII
       #{if tour=="1" do "" else "%" end}\\OptionTour
       #{if reception=="1" do "" else "%" end}\\OptionReception
-      #{if gala=="1" do "" else "%" end}\\OptionGala{#{plus}}
+      #{if gala do "" else "%" end}\\OptionGala{#{plus}}
       \\newpage
       
       """
@@ -150,7 +162,7 @@ defmodule Script do
   def run() do
     "../data/ICSA.xlsx"
     |> Parser.parse()
-    |> (fn data -> [data |> Enum.at(147)] end).()
+#    |> (fn data -> [data |> Enum.at(147)] end).()
     |> Generator.generate()
     |> IO.puts()
   end
