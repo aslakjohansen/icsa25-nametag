@@ -235,6 +235,27 @@
   \end{tikzpicture}
 }
 
+\newcommand{\RenderBorder}[0]{
+  \begin{tikzpicture}[remember picture,overlay]
+    \draw[draw=black,thick,dashed]
+         ([xshift= 3mm, yshift= 3mm] current page.south west)
+      -- ([xshift=-3mm, yshift= 3mm] current page.south east)
+      -- ([xshift=-3mm, yshift=-3mm] current page.north east)
+      -- ([xshift= 3mm, yshift=-3mm] current page.north west)
+      -- cycle
+    ;
+    \draw[draw=black,rounded corners=6mm,thick,dashed]
+         (current page.south west)
+      -- (current page.south east)
+      -- (current page.north east)
+      -- (current page.north west)
+      -- cycle
+    ;
+    \node[ellipse,draw=black,thick,dashed,minimum width=15mm,minimum height=15mm]
+      at ([yshift=-15mm/2] current page.north) {};
+  \end{tikzpicture}
+}
+
 \pagenumbering{gobble}
 
 \title{Nametags for ICSA'25}

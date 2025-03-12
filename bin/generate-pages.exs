@@ -135,6 +135,8 @@ defmodule Generator do
           num -> "+"<>num
         end
       
+      debug = true
+      
       """
       \\TopBanner{#{color}}{#{header}}
       \\MainText{black}{
@@ -153,6 +155,7 @@ defmodule Generator do
       #{if tour=="1" do "" else "%" end}\\OptionTour
       #{if reception=="1" do "" else "%" end}\\OptionReception
       #{if gala do "" else "%" end}\\OptionGala{#{plus}}
+      #{if debug do "" else "%" end}\\RenderBorder
       \\newpage
       
       """
