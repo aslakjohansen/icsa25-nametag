@@ -34,6 +34,7 @@
 \newcommand{\margin}{3mm}
 
 \newcommand{\ColCenter}[1]{\border/2+(\paperwidth-\border)/5*(#1+0.5)}
+\newcommand{\SponsorColCenter}[1]{\border/2+(\paperwidth-\border)/5*(#1+0.5)}
 
 \newcommand{\TopBanner}[2]{
   \begin{tikzpicture}[remember picture,overlay]
@@ -102,19 +103,19 @@
   \begin{tikzpicture}[remember picture,overlay]
     % sponsors
     \node[anchor=center,text=black]
-      at ([xshift=\ColCenter{0},yshift=-15mm/2] current page.north west)
+      at ([xshift=\SponsorColCenter{0},yshift=-15mm/2] current page.north west)
       {\textsl{sponsor 1}};
     \node[anchor=center,text=black]
-      at ([xshift=\ColCenter{1},yshift=-15mm/2] current page.north west)
+      at ([xshift=\SponsorColCenter{1},yshift=-15mm/2] current page.north west)
       {\textsl{sponsor 2}};
 %    \node[anchor=center,text=black]
-%      at ([xshift=\ColCenter{2},yshift=-15mm/4] current page.north west)
+%      at ([xshift=\SponsorColCenter{2},yshift=-15mm/4] current page.north west)
 %      {\textsl{sponsor}};
     \node[anchor=center,text=black]
-      at ([xshift=\ColCenter{3},yshift=-15mm/2] current page.north west)
+      at ([xshift=\SponsorColCenter{3},yshift=-15mm/2] current page.north west)
       {\includegraphics[scale=0.05]{figs/umbraco_logo_blue_horizontal.pdf}};
     \node[anchor=center,text=black]
-      at ([xshift=\ColCenter{4},yshift=-15mm/2] current page.north west)
+      at ([xshift=\SponsorColCenter{4},yshift=-15mm/2] current page.north west)
       {\includegraphics[scale=0.03]{figs/sdu.pdf}};
     
     % ICSA'25 logo
