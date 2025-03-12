@@ -110,29 +110,30 @@
       {\textsl{sponsor 3}};
     \node[anchor=center,text=black]
       at ([xshift=\border/2+(\paperwidth-\border)/5*4.5,yshift=-15mm/2] current page.north west)
-      {\textsl{sponsor 4}};
+      {\includegraphics[scale=0.03]{figs/sdu.pdf}};
     
     % ICSA'25 logo
     \node[anchor=south west]
       at ([xshift=\border,yshift=12mm+16mm+\border-5.5mm] current page.south west)
       {\includegraphics[scale=0.1]{figs/icsa25.pdf}};
     
-    % IEEE logo
-    \node[anchor=south]
-      at ([xshift=3.2mm,yshift=12mm+16mm+\border+13mm] current page.south)
-      {\includegraphics[scale=0.20]{figs/ieee_mb_black_pdf.pdf}};
-    
-    % SDU logo
-    \node[anchor=south]
-      at ([xshift=4mm,yshift=12mm+16mm+\border] current page.south)
-      {\includegraphics[scale=0.04]{figs/sdu.pdf}};
+%    % SDU logo
+%    \node[anchor=south]
+%      at ([xshift=4mm,yshift=12mm+16mm+\border] current page.south)
+%      {\includegraphics[scale=0.04]{figs/sdu.pdf}};
     
     % QR code for program
-    \node[anchor=south east]
+    \node[anchor=south east] (qr)
       at ([xshift=-\border,yshift=12mm+16mm+\border] current page.south east)
       {
         \fancyqr[image padding=0,gradient=true,gradient angle=135,r color=teal, l color=purple]{https://conf.researchr.org/program/icsa-2025/program-icsa-2025/}
       };
+    
+    % IEEE logo
+    \node[anchor=center]
+%      at ([xshift=3.2mm,yshift=12mm+16mm+\border+13mm] current page.south)
+      at ([xshift=-30mm] qr)
+      {\includegraphics[scale=0.20]{figs/ieee_mb_black_pdf.pdf}};
     
     % dates
     \node[anchor=north,text=white]
