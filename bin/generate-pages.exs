@@ -135,6 +135,38 @@ defmodule Generator do
           num -> "+"<>num
         end
       
+      %{
+        color: color,
+        header: header,
+        name: name,
+        affil: affil,
+        ws1: ws1,
+        ws2: ws2,
+        conf1: conf1,
+        conf2: conf2,
+        conf3: conf3,
+        tour: tour,
+        reception: reception,
+        gala: gala,
+        plus: plus,
+      }
+      end)
+    |> Enum.map(fn info ->
+      %{
+        color: color,
+        header: header,
+        name: name,
+        affil: affil,
+        ws1: ws1,
+        ws2: ws2,
+        conf1: conf1,
+        conf2: conf2,
+        conf3: conf3,
+        tour: tour,
+        reception: reception,
+        gala: gala,
+        plus: plus,
+      } = info
       debug = true
       
       """
