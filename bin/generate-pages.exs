@@ -25,16 +25,6 @@ defmodule Parser do
 end
 
 defmodule Generator do
-  defp cleancat(cat) do
-    case String.split(cat, " - ") do
-      ["Full conference" = name|_] -> name
-      ["Main conference only" = name|_] -> name
-      ["ICSA Chair" = name|_] -> name
-      ["Workshops/tutorials" = name|[days|_]] -> name <>": "<>days
-      name -> name
-    end
-  end
-  
   defp header2color(header) do
     sponsor_color = "orange!80!black"
     case header do
@@ -117,7 +107,6 @@ defmodule Generator do
       name  = Map.get(datum, "First name")<>" "<>Map.get(datum, "Last name")
       affil = Map.get(datum, "Company/Institution")
       _ident = Map.get(datum, "Participant ID")
-      cat = Map.get(datum, "Participant category")
       header = datum2header(datum)
       color = header2color(header)
       {ws1, ws2, conf1, conf2, conf3} = datum2days(datum)
