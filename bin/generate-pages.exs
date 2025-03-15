@@ -98,89 +98,93 @@ defmodule Generator do
     end
   end
   
+  defp datum2info(datum) do
+    name  = Map.get(datum, "First name")<>" "<>Map.get(datum, "Last name")
+    affil = Map.get(datum, "Company/Institution")
+    _ident = Map.get(datum, "Participant ID")
+    header = datum2header(datum)
+    color = header2color(header)
+    {ws1, ws2, conf1, conf2, conf3} = datum2days(datum)
+    reception = Map.get(datum, "Options Reception Yes - I will participate in the ICSA reception")
+    tour = Map.get(datum, "Options City tour Yes - I would like to participate in the city tour")
+    gala =
+      cond do
+        Map.get(datum, "Options Gala dinner - free ticket. I would like to attend the gala dinner.")=="1" -> true
+        header=="Gala Participant" -> true
+        true -> false
+      end
+    plus =
+      case Map.get(datum, "Options Additional tickets for Gala Dinner Select amount of additional Gala Dinner tickets") do
+        "" -> ""
+        num -> "+"<>num
+      end
+    
+    %{
+      color: color,
+      header: header,
+      name: name,
+      affil: affil,
+      ws1: ws1,
+      ws2: ws2,
+      conf1: conf1,
+      conf2: conf2,
+      conf3: conf3,
+      tour: tour,
+      reception: reception,
+      gala: gala,
+      plus: plus,
+    }
+  end
+  
+  defp info2presentation(info) do
+    %{
+      color: color,
+      header: header,
+      name: name,
+      affil: affil,
+      ws1: ws1,
+      ws2: ws2,
+      conf1: conf1,
+      conf2: conf2,
+      conf3: conf3,
+      tour: tour,
+      reception: reception,
+      gala: gala,
+      plus: plus,
+    } = info
+    debug = true
+    
+    """
+    \\TopBanner{#{color}}{#{header}}
+    \\MainText{black}{
+      #{name}
+      \\\\
+      \\textcolor{#{color}}{#{affil}}
+    }
+    %\\BottomBanner{#{color}}{}
+    \\OptionBanner{#{color}}
+    \\StaticMaterial
+    #{if ws1 do "" else "%" end}\\OptionWSI
+    #{if ws2 do "" else "%" end}\\OptionWSII
+    #{if conf1 do "" else "%" end}\\OptionConfI
+    #{if conf2 do "" else "%" end}\\OptionConfII
+    #{if conf3 do "" else "%" end}\\OptionConfIII
+    #{if tour=="1" do "" else "%" end}\\OptionTour
+    #{if reception=="1" do "" else "%" end}\\OptionReception
+    #{if gala do "" else "%" end}\\OptionGala{#{plus}}
+    #{if debug do "" else "%" end}\\RenderBorder
+    \\newpage
+    
+    """
+  end
+  
   def generate(data) do
 #    IO.puts(inspect data)
     data
     |> Enum.sort(&(Map.get(&1, "First name") <= Map.get(&2, "First name")))
     |> Enum.map(fn datum -> datum_cleanaffil(datum) end)
-    |> Enum.map(fn datum ->
-      name  = Map.get(datum, "First name")<>" "<>Map.get(datum, "Last name")
-      affil = Map.get(datum, "Company/Institution")
-      _ident = Map.get(datum, "Participant ID")
-      header = datum2header(datum)
-      color = header2color(header)
-      {ws1, ws2, conf1, conf2, conf3} = datum2days(datum)
-      reception = Map.get(datum, "Options Reception Yes - I will participate in the ICSA reception")
-      tour = Map.get(datum, "Options City tour Yes - I would like to participate in the city tour")
-      gala =
-        cond do
-          Map.get(datum, "Options Gala dinner - free ticket. I would like to attend the gala dinner.")=="1" -> true
-          header=="Gala Participant" -> true
-          true -> false
-        end
-      plus =
-        case Map.get(datum, "Options Additional tickets for Gala Dinner Select amount of additional Gala Dinner tickets") do
-          "" -> ""
-          num -> "+"<>num
-        end
-      
-      %{
-        color: color,
-        header: header,
-        name: name,
-        affil: affil,
-        ws1: ws1,
-        ws2: ws2,
-        conf1: conf1,
-        conf2: conf2,
-        conf3: conf3,
-        tour: tour,
-        reception: reception,
-        gala: gala,
-        plus: plus,
-      }
-      end)
-    |> Enum.map(fn info ->
-      %{
-        color: color,
-        header: header,
-        name: name,
-        affil: affil,
-        ws1: ws1,
-        ws2: ws2,
-        conf1: conf1,
-        conf2: conf2,
-        conf3: conf3,
-        tour: tour,
-        reception: reception,
-        gala: gala,
-        plus: plus,
-      } = info
-      debug = true
-      
-      """
-      \\TopBanner{#{color}}{#{header}}
-      \\MainText{black}{
-        #{name}
-        \\\\
-        \\textcolor{#{color}}{#{affil}}
-      }
-      %\\BottomBanner{#{color}}{}
-      \\OptionBanner{#{color}}
-      \\StaticMaterial
-      #{if ws1 do "" else "%" end}\\OptionWSI
-      #{if ws2 do "" else "%" end}\\OptionWSII
-      #{if conf1 do "" else "%" end}\\OptionConfI
-      #{if conf2 do "" else "%" end}\\OptionConfII
-      #{if conf3 do "" else "%" end}\\OptionConfIII
-      #{if tour=="1" do "" else "%" end}\\OptionTour
-      #{if reception=="1" do "" else "%" end}\\OptionReception
-      #{if gala do "" else "%" end}\\OptionGala{#{plus}}
-      #{if debug do "" else "%" end}\\RenderBorder
-      \\newpage
-      
-      """
-      end)
+    |> Enum.map(&datum2info/1)
+    |> Enum.map(&info2presentation/1)
     |> Enum.join()
   end
 end
