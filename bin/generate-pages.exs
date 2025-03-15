@@ -1,6 +1,6 @@
 #!/usr/bin/env elixir
 
-Mix.install([:xlsx_reader])
+Mix.install([:xlsx_reader, :jason])
 
 defmodule Parser do
   def parse(filename) do
@@ -100,6 +100,7 @@ defmodule Generator do
   
   defp datum2info(datum) do
     name  = Map.get(datum, "First name")<>" "<>Map.get(datum, "Last name")
+    email = Map.get(datum, "E-mail")
     affil = Map.get(datum, "Company/Institution")
     _ident = Map.get(datum, "Participant ID")
     header = datum2header(datum)
@@ -120,6 +121,7 @@ defmodule Generator do
       end
     
     %{
+      email: email,
       color: color,
       header: header,
       name: name,
@@ -129,11 +131,15 @@ defmodule Generator do
       conf1: conf1,
       conf2: conf2,
       conf3: conf3,
-      tour: tour,
-      reception: reception,
+      tour: tour=="1",
+      reception: reception=="1",
       gala: gala,
       plus: plus,
     }
+  end
+  
+  defp filter_info(entry, overrides) do
+    Map.merge(entry, Map.get(overrides, String.to_atom(entry.email), %{}))
   end
   
   defp info2presentation(info) do
@@ -169,8 +175,8 @@ defmodule Generator do
     #{if conf1 do "" else "%" end}\\OptionConfI
     #{if conf2 do "" else "%" end}\\OptionConfII
     #{if conf3 do "" else "%" end}\\OptionConfIII
-    #{if tour=="1" do "" else "%" end}\\OptionTour
-    #{if reception=="1" do "" else "%" end}\\OptionReception
+    #{if tour do "" else "%" end}\\OptionTour
+    #{if reception do "" else "%" end}\\OptionReception
     #{if gala do "" else "%" end}\\OptionGala{#{plus}}
     #{if debug do "" else "%" end}\\RenderBorder
     \\newpage
@@ -179,11 +185,19 @@ defmodule Generator do
   end
   
   def generate(data) do
+    {:ok, overrides} =
+#    overrides =
+      "../data/overrides.json"
+      |> File.read!()
+#      |> (fn something -> IO.puts(inspect something) end).()
+      |> Jason.decode(keys: :atoms)
+    
 #    IO.puts(inspect data)
     data
     |> Enum.sort(&(Map.get(&1, "First name") <= Map.get(&2, "First name")))
     |> Enum.map(fn datum -> datum_cleanaffil(datum) end)
     |> Enum.map(&datum2info/1)
+    |> Enum.map(fn info -> filter_info(info, overrides) end)
     |> Enum.map(&info2presentation/1)
     |> Enum.join()
   end
