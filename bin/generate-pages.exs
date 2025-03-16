@@ -46,7 +46,7 @@ defmodule Generator do
     email2datums =
       data
       |> Enum.reduce(%{}, fn datum,acc ->
-        Map.update(acc, Map.get(datum, "E-mail"), [datum], fn old -> [datum|old] end)
+        Map.update(acc, datum.email, [datum], fn old -> [datum|old] end)
         end)
       |> Enum.filter(fn {_email, v} -> length(v)!=1 end)
       |> Map.new()
@@ -215,9 +215,9 @@ defmodule Generator do
 #    IO.puts(inspect data)
     data
     |> Enum.sort(&(Map.get(&1, "First name") <= Map.get(&2, "First name")))
-    |> log_potential_issues()
     |> Enum.map(fn datum -> datum_cleanaffil(datum) end)
     |> Enum.map(&datum2info/1)
+    |> log_potential_issues()
     |> Enum.map(fn info -> filter_info(info, overrides) end)
     |> Enum.map(&info2presentation/1)
     |> Enum.join()
