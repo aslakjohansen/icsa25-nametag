@@ -158,7 +158,8 @@ defmodule Generator do
       gala: gala,
       plus: plus,
     } = info
-    debug = true
+    
+    debug = false
     
     """
     \\TopBanner{#{color}}{#{header}}
@@ -205,7 +206,7 @@ defmodule Script do
   def run() do
     "../data/ICSA.xlsx"
     |> Parser.parse()
-    |> (fn data -> [data |> Enum.at(148)] end).()
+#    |> (fn data -> [data |> Enum.at(148)] end).()
     |> Generator.generate()
     |> IO.puts()
   end
