@@ -186,10 +186,8 @@ defmodule Generator do
   
   def generate(data) do
     {:ok, overrides} =
-#    overrides =
       "../data/overrides.json"
       |> File.read!()
-#      |> (fn something -> IO.puts(inspect something) end).()
       |> Jason.decode(keys: :atoms)
     
 #    IO.puts(inspect data)
