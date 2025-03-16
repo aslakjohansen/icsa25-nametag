@@ -25,6 +25,8 @@ defmodule Parser do
 end
 
 defmodule Generator do
+  @issue_path "found_issues.json"
+  
   defp header2color(header) do
     sponsor_color = "orange!80!black"
     case header do
@@ -38,6 +40,25 @@ defmodule Generator do
       "Participant"<>_ -> "olive"
       _ -> "pink"
     end
+  end
+  
+  defp log_potential_issues(data) do
+    email2datums =
+      data
+      |> Enum.reduce(%{}, fn datum,acc ->
+        Map.update(acc, Map.get(datum, "E-mail"), [datum], fn old -> [datum|old] end)
+        end)
+      |> Enum.filter(fn {_email, v} -> length(v)!=1 end)
+      |> Map.new()
+    
+    IO.puts(@issue_path)
+    
+    :ok =
+      email2datums
+      |> Jason.encode!(pretty: true)
+      |> (fn contents -> File.write(@issue_path, contents) end).()
+    
+    data
   end
   
   defp datum_cleanaffil(datum) do
@@ -194,6 +215,7 @@ defmodule Generator do
 #    IO.puts(inspect data)
     data
     |> Enum.sort(&(Map.get(&1, "First name") <= Map.get(&2, "First name")))
+    |> log_potential_issues()
     |> Enum.map(fn datum -> datum_cleanaffil(datum) end)
     |> Enum.map(&datum2info/1)
     |> Enum.map(fn info -> filter_info(info, overrides) end)
