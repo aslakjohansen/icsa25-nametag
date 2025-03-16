@@ -51,8 +51,6 @@ defmodule Generator do
       |> Enum.filter(fn {_email, v} -> length(v)!=1 end)
       |> Map.new()
     
-    IO.puts(@issue_path)
-    
     :ok =
       email2datums
       |> Jason.encode!(pretty: true)
