@@ -101,7 +101,7 @@ defmodule Generator do
     cat = Map.get(datum, "Participant category")
     subcat = Map.get(datum, "Participation category")
     doa = Map.get(datum, "Day of attendance")
-    IO.puts("cat=#{cat} | subcat=#{subcat}")
+    
     cond do
       subcat =~ ~r/Full conference/i -> {true, true, true, true, true}
       subcat =~ ~r/Workshop, 1 day/i -> {false, false, false, true, false}
