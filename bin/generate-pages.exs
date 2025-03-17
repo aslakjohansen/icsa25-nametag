@@ -99,12 +99,15 @@ defmodule Generator do
   defp datum2days(datum) do
     cat = Map.get(datum, "Participant category")
     subcat = Map.get(datum, "Participation category")
+    doa = Map.get(datum, "Day of attendance")
+    IO.puts("cat=#{cat} | subcat=#{subcat}")
     cond do
       subcat =~ ~r/Full conference/i -> {true, true, true, true, true}
       subcat =~ ~r/Workshop, 1 day/i -> {false, false, false, true, false}
       cat =~ ~r/Data Science Day/i -> {false, true, false, false, false}
       cat =~ ~r/Full conference/i -> {true, true, true, true, true}
       cat =~ ~r/ICSA Chair/i -> {true, true, true, true, true}
+      cat =~ ~r/ICSA 2025 Staff/i -> {true, true, true, true, true}
       cat =~ ~r/Main conference only/i -> {false, false, true, true, true}
       cat =~ ~r/Mjolner Informatics/i -> {true, true, true, true, true}
       cat =~ ~r/SDU Organizers/i -> {true, true, true, true, true}
@@ -114,6 +117,11 @@ defmodule Generator do
       cat =~ ~r/Danish Data Science Academy/i -> {false, true, false, false, false}
       cat =~ ~r/2 days/i -> {true, true, false, false, false}
       cat =~ ~r/Gala Dinner/i -> {false, false, false, false, false}
+      doa =~ ~r/31st of March/i -> {true, false, false, false, false}
+      doa =~ ~r/1st of April/i -> {false, true, false, false, false}
+      doa =~ ~r/2nd of April/i -> {false, false, true, false, false}
+      doa =~ ~r/3rd of April/i -> {false, false, false, true, false}
+      doa =~ ~r/4th of April/i -> {false, false, false, false, true}
     end
   end
   
