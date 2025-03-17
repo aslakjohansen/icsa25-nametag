@@ -90,6 +90,7 @@ defmodule Generator do
       {%{"Participant category" => "SDU Organizers - no fee"}, _, _} -> "ICSA Organizer"
       {%{"Paper Title and Number" => paper}, _, _} when paper != "" -> "Author"
       {%{"Participant category" => "Student Volunteer"}, _, _} -> "ICSA Staff"
+      {%{"Participant category" => "ICSA 2025 Staff"}, _, _} -> "ICSA Staff"
       {%{"Participant category" => "ICSA Staff"}, _, _} -> "ICSA Staff"
       {%{"Participant category" => "Gala Dinner"}, _, _} -> "Gala Participant"
       _ -> "Participant"
