@@ -32,6 +32,8 @@ defmodule Generator do
     case header do
       "Mjølner Informatics" -> sponsor_color
       "DDSA" -> sponsor_color
+      "Umbraco" -> sponsor_color
+      "DIREC" -> sponsor_color
       "ICSA Chair" -> "black"
       "ICSA Organizer" -> "purple"
       "ICSA Staff" -> "purple"
@@ -93,6 +95,9 @@ defmodule Generator do
       {%{"Participant category" => "ICSA 2025 Staff"}, _, _} -> "ICSA Staff"
       {%{"Participant category" => "ICSA Staff"}, _, _} -> "ICSA Staff"
       {%{"Participant category" => "Gala Dinner"}, _, _} -> "Gala Participant"
+      {%{"Participant category" => "Valentina"}, _, _} -> "Participant"
+      {%{"Participant category" => "Umbraco"}, _, _} -> "Umbraco"
+      {%{"Participant category" => "DIREC"}, _, _} -> "DIREC"
       _ -> "Participant"
     end
   end
@@ -123,6 +128,9 @@ defmodule Generator do
       doa =~ ~r/2nd of April/i -> {false, false, true, false, false}
       doa =~ ~r/3rd of April/i -> {false, false, false, true, false}
       doa =~ ~r/4th of April/i -> {false, false, false, false, true}
+      cat =~ ~r/Valentina/i -> {true, true, true, true, true}
+      cat =~ ~r/Umbraco/i -> {true, true, true, true, true}
+      cat =~ ~r/DIREC/i -> {true, true, true, true, true}
     end
   end
   
