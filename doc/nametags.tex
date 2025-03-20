@@ -128,10 +128,17 @@
       at ([xshift=\border,yshift=12mm+16mm+\border-5mm] current page.south west)
       {\includegraphics[scale=0.1]{figs/icsa25.pdf}};
     
+    % timeline
+    \node[anchor=south]
+      (timeline)
+      at ([xshift=4mm,yshift=12mm+16mm+\border-4mm] current page.south)
+      {\scalebox{0.8}{\sffamily 31 March - 4 April}};
+      
     % SDU logo
     \node[anchor=south]
-      at ([xshift=4mm,yshift=12mm+16mm+\border] current page.south)
-      {\includegraphics[scale=0.04]{figs/sdu.pdf}};
+      at ([yshift=4mm] timeline)
+%      at ([xshift=4mm,yshift=12mm+16mm+\border] current page.south)
+      {\includegraphics[scale=0.3]{figs/sdu_text.pdf}};
     
     % QR code for program
     \node[anchor=south east] (qr)
