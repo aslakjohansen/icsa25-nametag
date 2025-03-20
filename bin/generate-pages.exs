@@ -197,28 +197,31 @@ defmodule Generator do
     
     debug = false
     
-    """
-    \\TopBanner{#{color}}{#{header}}
-    \\MainText{black}{
-      #{name}
-      \\\\
-      \\textcolor{#{color}}{#{affil}}
-    }
-    %\\BottomBanner{#{color}}{}
-    \\OptionBanner{#{color}}
-    \\StaticMaterial
-    #{if ws1 do "" else "%" end}\\OptionWSI
-    #{if ws2 do "" else "%" end}\\OptionWSII
-    #{if conf1 do "" else "%" end}\\OptionConfI
-    #{if conf2 do "" else "%" end}\\OptionConfII
-    #{if conf3 do "" else "%" end}\\OptionConfIII
-    #{if tour do "" else "%" end}\\OptionTour
-    #{if reception do "" else "%" end}\\OptionReception
-    #{if gala do "" else "%" end}\\OptionGala{#{plus}}
-    #{if debug do "" else "%" end}\\RenderBorder
-    \\newpage
+    page =
+      """
+      \\TopBanner{#{color}}{#{header}}
+      \\MainText{black}{
+        #{name}
+        \\\\
+        \\textcolor{#{color}}{#{affil}}
+      }
+      %\\BottomBanner{#{color}}{}
+      \\OptionBanner{#{color}}
+      \\StaticMaterial
+      #{if ws1 do "" else "%" end}\\OptionWSI
+      #{if ws2 do "" else "%" end}\\OptionWSII
+      #{if conf1 do "" else "%" end}\\OptionConfI
+      #{if conf2 do "" else "%" end}\\OptionConfII
+      #{if conf3 do "" else "%" end}\\OptionConfIII
+      #{if tour do "" else "%" end}\\OptionTour
+      #{if reception do "" else "%" end}\\OptionReception
+      #{if gala do "" else "%" end}\\OptionGala{#{plus}}
+      #{if debug do "" else "%" end}\\RenderBorder
+      \\newpage
+      
+      """
     
-    """
+    page<>page
   end
   
   def generate(data) do
