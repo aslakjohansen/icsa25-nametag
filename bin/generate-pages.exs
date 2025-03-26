@@ -29,15 +29,18 @@ defmodule Generator do
   
   defp header2color(header) do
     sponsor_color = "orange!80!black"
+    contributor_color = "blue!80"
     case header do
       "Mjølner Informatics" -> sponsor_color
       "DDSA" -> sponsor_color
       "Umbraco" -> sponsor_color
       "DIREC" -> sponsor_color
+      "LEGO Serious Play" -> sponsor_color
       "ICSA Chair" -> "black"
       "ICSA Organizer" -> "purple"
       "ICSA Staff" -> "purple"
-      "Author"<>_ -> "blue!80"
+      "Author"<>_ -> contributor_color
+      "Speaker"<>_ -> contributor_color
       "Gala Participant" -> "teal"
       "Participant"<>_ -> "olive"
       _ -> "pink"
@@ -90,6 +93,7 @@ defmodule Generator do
       {%{"Participant category" => "Danish Data Science Academy"}, _, _} -> "DDSA"
       {%{"Participant category" => "ICSA Chair"}, _, _} -> "ICSA Chair"
       {%{"Participant category" => "SDU Organizers - no fee"}, _, _} -> "ICSA Organizer"
+      {%{"Participant category" => "Speaker - no fee - 1 day ticket"}, _, _} -> "Speaker"
       {%{"Paper Title and Number" => paper}, _, _} when paper != "" -> "Author"
       {%{"Participant category" => "Student Volunteer"}, _, _} -> "ICSA Staff"
       {%{"Participant category" => "ICSA 2025 Staff"}, _, _} -> "ICSA Staff"
@@ -98,6 +102,7 @@ defmodule Generator do
       {%{"Participant category" => "Valentina"}, _, _} -> "Participant"
       {%{"Participant category" => "Umbraco"}, _, _} -> "Umbraco"
       {%{"Participant category" => "DIREC"}, _, _} -> "DIREC"
+      {%{"Participant category" => "LEGO Serious Play"}, _, _} -> "LEGO Serious Play"
       _ -> "Participant"
     end
   end
@@ -117,7 +122,7 @@ defmodule Generator do
       cat =~ ~r/Main conference only/i -> {false, false, true, true, true}
       cat =~ ~r/Mjolner Informatics/i -> {true, true, true, true, true}
       cat =~ ~r/SDU Organizers/i -> {true, true, true, true, true}
-      cat =~ ~r/Speaker/i -> {true, true, true, true, true}
+      cat =~ ~r/Speaker/i -> {true, false, false, false, false}
       cat =~ ~r/March 31st/i -> {true, false, false, false, false}
       cat =~ ~r/April 1st/i -> {false, true, false, false, false}
       cat =~ ~r/Danish Data Science Academy/i -> {false, true, false, false, false}
@@ -131,6 +136,7 @@ defmodule Generator do
       cat =~ ~r/Valentina/i -> {true, true, true, true, true}
       cat =~ ~r/Umbraco/i -> {true, true, true, true, true}
       cat =~ ~r/DIREC/i -> {true, true, true, true, true}
+      cat =~ ~r/LEGO Serious Play/i -> {false, false, false, true, false}
     end
   end
   
@@ -148,6 +154,7 @@ defmodule Generator do
       cond do
         Map.get(datum, "Options Gala dinner - free ticket. I would like to attend the gala dinner.")=="1" -> true
         header=="Gala Participant" -> true
+        header=="LEGO Serious Play" -> true
         true -> false
       end
     plus =
